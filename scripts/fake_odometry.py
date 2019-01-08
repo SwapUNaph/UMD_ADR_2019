@@ -10,7 +10,6 @@ import sys
 from bebop_msgs.msg import Ardrone3PilotingStateFlyingStateChanged
 from std_msgs.msg import Bool, Int32
 from bebop_auto.msg import Auto_Driving_Msg
-# import common_resources as cr
 from nav_msgs.msg import Odometry
 
 
