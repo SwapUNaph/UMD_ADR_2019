@@ -3,7 +3,6 @@
 # Script developed by Sharon Shallom
 
 import rospy
-from std_msgs.msg import Empty
 from geometry_msgs.msg import Twist
 import signal
 import sys
