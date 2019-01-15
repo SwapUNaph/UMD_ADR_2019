@@ -3,17 +3,18 @@
 # Script developed by Sharon Shallom
 
 import rospy
-from geometry_msgs.msg import Twist
+# from geometry_msgs.msg import Twist
 import signal
 import sys
-from bebop_msgs.msg import Ardrone3PilotingStateFlyingStateChanged
-from std_msgs.msg import Bool, Int32
-from bebop_auto.msg import Auto_Driving_Msg
+# from bebop_msgs.msg import Ardrone3PilotingStateFlyingStateChanged
+# from std_msgs.msg import Bool, Int32
+# from bebop_auto.msg import Auto_Driving_Msg
 from nav_msgs.msg import Odometry
 
 
 def signal_handler(_, __):
     sys.exit(0)
+
 
 if __name__ == '__main__':
     # Enable killing the script with Ctrl+C.
