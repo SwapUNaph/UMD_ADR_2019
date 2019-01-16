@@ -10,6 +10,7 @@ import sys
 # from std_msgs.msg import Bool, Int32
 # from bebop_auto.msg import Auto_Driving_Msg
 from nav_msgs.msg import Odometry
+import time
 
 
 def signal_handler(_, __):
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     while True:
         rate.sleep()
         msg = Odometry()
-        msg.twist.twist.linear.x = 1.0
+        msg.twist.twist.linear.x = time.time() - 1547658499
         fake_odometry_pub.publish(msg)
         rospy.loginfo(msg.twist.twist.linear)
 
