@@ -54,9 +54,6 @@ def callback_bebop_odometry_changed(data):
 
 
 
-
-
-
 def make_unit(vector):
     unit_vector = vector/np.linalg.norm(vector)
     return unit_vector
