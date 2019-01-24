@@ -6,9 +6,8 @@ import rospy
 import signal
 import sys
 from std_msgs.msg import Bool, Int32, Empty
-# import numpy as np
-# from bebop_tools/config import bebop_tools
-# roslaunch bebop_tools joy_teleop.launch
+from geometry_msgs.msg import Twist
+import numpy as np
 
 
 def signal_handler(_, __):
@@ -16,12 +15,19 @@ def signal_handler(_, __):
 
 
 def callback_button_pressed(button):
-    # rospy.loginfo(button)
     # Takeoff
     if button.data == 7:
-        rospy.loginfo('Takeoff Initiated')
-        publisher_takeoff.publish(msg)
-
+        if not throttle_value[2] == 0:
+            rospy.loginfo('Warning Throttle Not Centered')
+        elif not throttle_value[0] == 0:
+            rospy.loginfo('Warning Pitch Not Centered')
+        elif not throttle_value[1] == 0:
+            rospy.loginfo('Warning Roll Not Centered')
+        elif not throttle_value[3] == 0:
+            rospy.loginfo('Warning Yaw Not Centered')
+        else:
+            rospy.loginfo('Takeoff Initiated')
+            publisher_takeoff.publish(msg)
     # Land
     if button.data == 8:
         publisher_land.publish(msg)
@@ -32,6 +38,11 @@ def callback_button_pressed(button):
         rospy.loginfo('Reset Initiated')
 
 
+def callback_throttle_high(data):
+    global throttle_value
+    throttle_value = np.array([data.linear.x, data.linear.y, data.linear.z, data.angular.z])
+
+
 if __name__ == '__main__':
     # Enable killing the script with Ctrl+C.
     signal.signal(signal.SIGINT, signal_handler)
@@ -40,16 +51,23 @@ if __name__ == '__main__':
 
     # Global variables
     msg = Empty()
+    throttle_value = np.array([0, 0, 0, 0])
 
     # Publishers
-    # publisher_flt_st_cmd = rospy.Publisher("/auto/flt_st_cmd", Auto_Driving_Msg, queue_size=1, latch=True)j
     publisher_takeoff = rospy.Publisher("/bebop/takeoff", Empty, queue_size=1, latch=True)
     publisher_land = rospy.Publisher("/bebop/land", Empty, queue_size=1, latch=True)
     publisher_reset = rospy.Publisher("/bebop/reset", Empty, queue_size=1, latch=True)
 
     # Subscribers
     rospy.Subscriber("/auto/flt_st_cmd", Int32, callback_button_pressed)
+    rospy.Subscriber("/bebop/cmd_vel", Twist, callback_throttle_high)
 
     rospy.loginfo("ready")
-
+    rospy.loginfo("Btn Code:")
+    rospy.loginfo("7 - Takeoff")
+    rospy.loginfo("8 - Land")
+    rospy.loginfo("9 - Reset")
+    rospy.loginfo("10 - N/A")
+    rospy.loginfo("11 - Autonomous Mode")
+    rospy.loginfo("12 - Manual Mode")
     rospy.spin()
