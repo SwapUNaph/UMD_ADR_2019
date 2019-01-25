@@ -19,12 +19,16 @@ def callback_button_pressed(button):
     if button.data == 7:
         if not throttle_value[2] == 0:
             rospy.loginfo('Warning Throttle Not Centered')
+            rospy.loginfo(throttle_value[2])
         elif not throttle_value[0] == 0:
             rospy.loginfo('Warning Pitch Not Centered')
+            rospy.loginfo(throttle_value[0])
         elif not throttle_value[1] == 0:
             rospy.loginfo('Warning Roll Not Centered')
+            rospy.loginfo(throttle_value[1])
         elif not throttle_value[3] == 0:
             rospy.loginfo('Warning Yaw Not Centered')
+            rospy.loginfo(throttle_value[3])
         else:
             rospy.loginfo('Takeoff Initiated')
             publisher_takeoff.publish(msg)
