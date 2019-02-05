@@ -10,13 +10,13 @@ init_std_dev = [1.0*ones(1,3),deg2rad(30)];
 dist = 3;
 height = 2;
 flightplan = [dist,0,height,deg2rad(090);
-         0,dist,height,deg2rad(160);
+         0,dist,height+.2,deg2rad(160);
         -dist,dist/2,height,deg2rad(345);
         0,-dist,height,deg2rad(340)];
     
 dist = 2.5;
 gates = [dist,0,height,deg2rad(110);
-         0,dist,height,deg2rad(160);
+         0,dist,height+.4,deg2rad(160);
         -dist+0.5,dist/2,height,deg2rad(345);
         0,-dist+1,height,deg2rad(340)];
     
@@ -45,7 +45,7 @@ I = [1 0 0;
 m = 2;
 g = 9.81;
 
-max_vel = 1.0;
+max_vel = 1.5;
 max_theta_X = 75*pi/180; % radians
 max_theta_Y = 75*pi/180; % radians
 max_v_Z = 2*max_vel; % m/s
