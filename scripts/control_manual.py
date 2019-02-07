@@ -72,6 +72,6 @@ if __name__ == '__main__':
     rospy.loginfo("8 - Land")
     rospy.loginfo("9 - Reset")
     rospy.loginfo("10 - N/A")
-    rospy.loginfo("11 - Autonomous Mode")
-    rospy.loginfo("12 - Manual Mode")
+    rospy.loginfo("11 - Manual Mode")
+    rospy.loginfo("12 - Autonomous Mode")
     rospy.spin()
