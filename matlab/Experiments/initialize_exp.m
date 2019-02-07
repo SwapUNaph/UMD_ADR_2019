@@ -11,7 +11,7 @@ dist = 3;
 height = 2;
 flightplan = [0,2*dist,height,deg2rad(180);
          0,0,height,deg2rad(0)];
-    
+
 states_num = size(flightplan,1);
 
 WP1 = flightplan(end,:);
@@ -38,3 +38,13 @@ max_theta_X = 75*pi/180; % radians
 max_theta_Y = 75*pi/180; % radians
 max_v_Z = 2*max_vel; % m/s
 max_rot_Z = max_vel*(60)*pi/180; % 13 deg... rad/s
+
+%% create WP bus
+elems(1) = Simulink.BusElement;
+elems(1).Name = 'list';
+elems(1).Dimensions = size(flightplan); 
+elems(2) = Simulink.BusElement;
+elems(2).Name = 'idx';
+elems(2).Dimensions = 1;
+WP_all_bus = Simulink.Bus;
+WP_all_bus.Elements = elems;

@@ -57,21 +57,11 @@ Initial_vel_e = max_vel*[1,0,0];
 Initial_ori = [0 0 pi/4];
 
 %% create WP bus
-% elems(1) = Simulink.BusElement;
-% elems(1).Name = 'VALVE1';
-% elems(1).Dimensions = 1;
-% elems(1).DimensionsMode = 'Fixed';
-% elems(1).DataType = 'double';
-% elems(1).SampleTime = -1;
-% elems(1).Complexity = 'real';
-% 
-% elems(2) = Simulink.BusElement;
-% elems(2).Name = 'VALVE2';
-% elems(2).Dimensions = 1;
-% elems(2).DimensionsMode = 'Fixed';
-% elems(2).DataType = 'double';
-% elems(2).SampleTime = -1;
-% elems(2).Complexity = 'real';
-% 
-% WP_all_bus = Simulink.Bus;
-% WP_all_bus.Elements = elems;
+elems(1) = Simulink.BusElement;
+elems(1).Name = 'list';
+elems(1).Dimensions = size(flightplan); 
+elems(2) = Simulink.BusElement;
+elems(2).Name = 'idx';
+elems(2).Dimensions = 1;
+WP_all_bus = Simulink.Bus;
+WP_all_bus.Elements = elems;
