@@ -11,14 +11,14 @@ dist = 3;
 height = 2;
 flightplan = [dist+1,0,height,deg2rad(090);
          0,dist,height,deg2rad(160);
-        -dist,dist/2,height,deg2rad(345)-2*pi;
-        0,-dist,height,deg2rad(340)-2*pi];
+        -dist,dist/2,height,deg2rad(-15);
+        0,-dist,height,deg2rad(-20)];
     
 dist = 2.5;
 gates = [dist+1,0,height,deg2rad(110);
          0,dist,height,deg2rad(160);
-        -dist+0.5,dist/2,height,deg2rad(345)-2*pi;
-        0,-dist+1,height,deg2rad(340)-2*pi];
+        -dist+0.5,dist/2,height,deg2rad(-15);
+        0,-dist+1,height,deg2rad(-20)];
     
 states_num = size(flightplan,1);
 
