@@ -4,8 +4,12 @@ clc
 
 load('Busses.mat');
 gate_size = 1.4;
-FOV = 1.05;
-init_std_dev = [1.0*ones(1,3),deg2rad(30)];
+two_std_dev_init = [1,1,0.3,deg2rad(15)];
+two_std_dev_thres = 0.2;
+
+resolution = [1280 720];
+VFOV = 1.05;
+HFOV = VFOV*resolution(1)/resolution(2);
 
 dist = 3;
 height = 2;
@@ -19,9 +23,8 @@ gates = [dist+1,0,height,deg2rad(110);
          0,dist,height,deg2rad(160);
         -dist+0.5,dist/2,height,deg2rad(-15);
         0,-dist+1,height,deg2rad(-20)];
-    
-states_num = size(flightplan,1);
 
+%% initialize some spline
 WP1 = flightplan(end,:);
 WP2 = flightplan(1,:);
 hdg0 = WP1(4);
@@ -34,9 +37,6 @@ P1 = [P0(1)+m*cos(hdg0), P0(2)+m*sin(hdg0), P3(3)];
 P2 = P3 - n*[cos(hdg3) sin(hdg3) 0];
 
 spline_init = [P0;P1;P2;P3];
-
-std_dev_factor = 1.0;
-std_dev_switch = std_dev_factor/5;
 
 %% drone
 I = [1 0 0;

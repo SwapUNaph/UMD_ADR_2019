@@ -4,16 +4,19 @@ clc
 
 load('Busses.mat');
 gate_size = 1.4;
-FOV = 1.05;
-init_std_dev = [1.0*ones(1,3),deg2rad(30)];
+two_std_dev_init = [1,1,0.3,deg2rad(15)];
+two_std_dev_thres = 0.2;
+
+resolution = [1280 720];
+VFOV = 1.05;
+HFOV = VFOV*resolution(1)/resolution(2);
 
 dist = 3;
 height = 2;
 flightplan = [0,2*dist,height,deg2rad(180);
          0,0,height,deg2rad(0)];
 
-states_num = size(flightplan,1);
-
+%% initialize some spline
 WP1 = flightplan(end,:);
 WP2 = flightplan(1,:);
 hdg0 = WP1(4);
@@ -27,17 +30,14 @@ P2 = P3 - n*[cos(hdg3) sin(hdg3) 0];
 
 spline_init = [P0;P1;P2;P3];
 
-std_dev_factor = 1.0;
-std_dev_switch = std_dev_factor/5;
-
 %% drone
 g = 9.81;
 
 max_vel = 0.5;
-max_theta_X = 75*pi/180; % radians
-max_theta_Y = 75*pi/180; % radians
-max_v_Z = 2*max_vel; % m/s
-max_rot_Z = max_vel*(60)*pi/180; % 13 deg... rad/s
+max_theta_X = 8*pi/180; % radians
+max_theta_Y = 8*pi/180; % radians
+max_v_Z = 1*max_vel; % m/s
+max_rot_Z = (13)*pi/180; % 13 deg... rad/s
 
 %% create WP bus
 elems(1) = Simulink.BusElement;
