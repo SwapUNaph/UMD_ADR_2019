@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # Global variables
 
     # Publishers
-    fake_odometry_pub = rospy.Publisher('/auto/fake_odom', Odometry, queue_size=1, latch=True)
+    fake_odometry_pub = rospy.Publisher('/bebop/odom', Odometry, queue_size=1, latch=True)
 
     # run with 20Hz
     rate = rospy.Rate(20)
@@ -34,11 +34,17 @@ if __name__ == '__main__':
     rospy.loginfo("ready")
     rospy.loginfo("publishing fake odometry")
 
+    start = time.time()
+
     while True:
         rate.sleep()
         msg = Odometry()
-        msg.twist.twist.linear.x = time.time() - 1547658499
+        msg.pose.pose.position.x = time.time()/10 - start/10
+        msg.pose.pose.orientation.w = 1
+        msg.pose.pose.orientation.x = 0
+        msg.pose.pose.orientation.y = 0
+        msg.pose.pose.orientation.z = 0
         fake_odometry_pub.publish(msg)
-        rospy.loginfo(msg.twist.twist.linear)
+        rospy.loginfo(msg.pose.pose)
 
 
