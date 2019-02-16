@@ -17,34 +17,34 @@ def signal_handler(_, __):
 def callback_button_pressed(button):
     # Takeoff
     if button.data == 7:
-        if not throttle_value[2] == 0:
+        if not cmd[2] == 0:
             rospy.loginfo('Warning Throttle Not Centered')
-            rospy.loginfo(throttle_value[2])
-        elif not throttle_value[0] == 0:
+            rospy.loginfo(cmd[2])
+        elif not cmd[0] == 0:
             rospy.loginfo('Warning Pitch Not Centered')
-            rospy.loginfo(throttle_value[0])
-        elif not throttle_value[1] == 0:
+            rospy.loginfo(cmd[0])
+        elif not cmd[1] == 0:
             rospy.loginfo('Warning Roll Not Centered')
-            rospy.loginfo(throttle_value[1])
-        elif not throttle_value[3] == 0:
+            rospy.loginfo(cmd[1])
+        elif not cmd[3] == 0:
             rospy.loginfo('Warning Yaw Not Centered')
-            rospy.loginfo(throttle_value[3])
+            rospy.loginfo(cmd[3])
         else:
             rospy.loginfo('Takeoff Initiated')
-            publisher_takeoff.publish(msg)
+            publisher_takeoff.publish(Empty())
     # Land
     if button.data == 8:
-        publisher_land.publish(msg)
+        publisher_land.publish(Empty())
         rospy.loginfo('Landing Initiated')
     # reset
     if button.data == 9:
-        publisher_reset.publish(msg)
+        publisher_reset.publish(Empty())
         rospy.loginfo('Reset Initiated')
 
 
-def callback_throttle_high(data):
-    global throttle_value
-    throttle_value = np.array([data.linear.x, data.linear.y, data.linear.z, data.angular.z])
+def callback_update_cmd(data):
+    global cmd
+    cmd = np.array([data.linear.x, data.linear.y, data.linear.z, data.angular.z])
 
 
 if __name__ == '__main__':
@@ -54,17 +54,17 @@ if __name__ == '__main__':
     rospy.init_node('control_manual')
 
     # Global variables
-    msg = Empty()
-    throttle_value = np.array([0, 0, 0, 0])
+    cmd = np.array([0, 0, 0, 0])
 
     # Publishers
     publisher_takeoff = rospy.Publisher("/bebop/takeoff", Empty, queue_size=1, latch=True)
     publisher_land = rospy.Publisher("/bebop/land", Empty, queue_size=1, latch=True)
     publisher_reset = rospy.Publisher("/bebop/reset", Empty, queue_size=1, latch=True)
+    publisher_cmd = rospy.Publisher("/bebop/cmd_vel", Twist, queue_size=1, latch=True)
 
     # Subscribers
     rospy.Subscriber("/auto/flt_st_cmd", Int32, callback_button_pressed)
-    rospy.Subscriber("/bebop/cmd_vel", Twist, callback_throttle_high)
+    rospy.Subscriber("/auto/cmd", Twist, callback_update_cmd)
 
     rospy.loginfo("ready")
     rospy.loginfo("Btn Code:")
@@ -74,4 +74,13 @@ if __name__ == '__main__':
     rospy.loginfo("10 - N/A")
     rospy.loginfo("11 - Manual Mode")
     rospy.loginfo("12 - Autonomous Mode")
-    rospy.spin()
+
+    rate = rospy.Rate(30)
+    while not rospy.is_shutdown():
+        msg = Twist()
+        msg.linear.x = cmd[0]
+        msg.linear.y = cmd[1]
+        msg.linear.z = cmd[2]
+        msg.angular.z = cmd[3]
+        publisher_cmd.publish(msg)
+    rate.sleep()

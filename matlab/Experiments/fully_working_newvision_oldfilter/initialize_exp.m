@@ -4,32 +4,21 @@ clc
 
 load('Busses.mat');
 gate_size = 1.4;
-two_std_dev_init = [0.7,0.7,0.4,deg2rad(60)];
-two_std_dev_thres = 0.15;
+two_std_dev_init = [1,1,0.3,deg2rad(15)];
+two_std_dev_thres = 0.2;
 
 resolution = [1280 720];
-VFOV = 1.05/1.2;
+VFOV = 1.05;
 HFOV = VFOV*resolution(1)/resolution(2);
 
 height = 2.1;
-takeoff = [0, 0, height, deg2rad(0)];
-path_to_track = [3,0,0,deg2rad(0)];
-flightplan = [2,1.75,0,deg2rad(0);
-             -2,-1.75,0,deg2rad(180)];
+flightplan = [3.5,0,height,deg2rad(0);
+    6.5,0,height,deg2rad(0);
+    0,0.1,height,deg2rad(00)];
 
-         
-%% initialize map
-WP_list_init = zeros(size(flightplan));
-WP_list_init(1,1:3) = takeoff(1:3) + path_to_track(1:3);
-WP_list_init(1,4) = path_to_track(4);
-for i = 2:size(flightplan,1)
-    WP_list_init(i,1:3) = WP_list_init(i-1,1:3) + flightplan(i,1:3);
-    WP_list_init(i,4) = flightplan(i,4);
-end
-
-%% initialize spline
-WP1 = takeoff;
-WP2 = WP_list_init(1,:);
+%% initialize some spline
+WP1 = flightplan(end,:);
+WP2 = flightplan(1,:);
 hdg0 = WP1(4);
 hdg3 = WP2(4);
 P0 = WP1(1:3);

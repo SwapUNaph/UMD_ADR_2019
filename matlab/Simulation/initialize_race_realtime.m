@@ -4,7 +4,7 @@ clc
 
 load('Busses.mat');
 gate_size = 1.4;
-two_std_dev_init = [1,1,0.3,deg2rad(15)];
+two_std_dev_init = [1,1,0.5,deg2rad(30)];
 two_std_dev_thres = 0.2;
 
 resolution = [1280 720];

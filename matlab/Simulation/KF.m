@@ -14,7 +14,7 @@ P = zeros(2,2,101);
 P(:,:,1) = P_init;
 for i=1:100
     meas = meas_mean' + mean_var*randn(2,1);
-    meas_total = [meas_total, meas]
+    meas_total = [meas_total, meas];
     
     K_gain = P_update*inv(P_update + mean_var);
     
