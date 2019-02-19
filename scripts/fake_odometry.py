@@ -44,6 +44,7 @@ if __name__ == '__main__':
         msg.pose.pose.orientation.x = 0
         msg.pose.pose.orientation.y = 0
         msg.pose.pose.orientation.z = 0
+        msg.twist.twist.linear.x = 1
         fake_odometry_pub.publish(msg)
         rospy.loginfo(msg.pose.pose)
 

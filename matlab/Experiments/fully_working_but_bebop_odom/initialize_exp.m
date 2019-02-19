@@ -11,12 +11,12 @@ resolution = [1280 720];
 VFOV = 1.05/1.2;
 HFOV = VFOV*resolution(1)/resolution(2);
 
-height = 1.1;
-takeoff = [0, 0, height, deg2rad(0)];
-path_to_track = [2,0,0,deg2rad(-20)]; % start to first gate
-flightplan = [-4,1.5,0,deg2rad(-90); % end to first gate
-                0,-5,0,deg2rad(-90); % first gate to 2nd gate
-             3.5,-2,0,deg2rad(0);
+height = 2.1;
+takeoff = [0, 0, height, deg2rad(90)];
+path_to_track = [0,3,0,deg2rad(90)];
+flightplan = [-4,1.5,0,deg2rad(90);
+                -1,5,0,deg2rad(90);
+             1,2,0,deg2rad(0);
              2,-3,0,deg2rad(-90);
              0,-4,0,deg2rad(-90)];
              

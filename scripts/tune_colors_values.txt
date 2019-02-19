@@ -1,8 +1,12 @@
+80, 150, 90
+140, 255, 255
+gates outside
+
+# script "tune_colors.py" reads first two lines of values in this file and applies those thresholds to image
+
 80, 130, 80
 130, 255, 255
 gates cypress
-
-# script "tune_colors.py" reads first two lines of values in this file and applies those thresholds to image
 
 
 70, 105, 50

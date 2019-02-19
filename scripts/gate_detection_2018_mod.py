@@ -717,8 +717,8 @@ if __name__ == '__main__':
     latest_pose = None                          # latest odometry
     gate_size = 1.4                             # initial gate size
     output_scale = 0.1                          # factor to scale all images with before broadcasting to save bandwidth
-    orange_low = np.array([80, 130, 80])       # some original orange values
-    orange_high = np.array([130, 255, 255])
+    orange_low = np.array([80, 150, 90])       # some original orange values
+    orange_high = np.array([140, 255, 255])
 
     # initialize bridge to transform ROS images to CV matrices
     bridge = CvBridge()
@@ -726,7 +726,7 @@ if __name__ == '__main__':
     # subscribers
     rospy.Subscriber("/zed/left/camera_info", CameraInfo, camera_info_update)
     rospy.Subscriber("/zed/left/image_rect_color", Image, stereo_callback)
-    rospy.Subscriber("/bebop/odom", Odometry, pose_callback)
+    rospy.Subscriber("/zed/odom", Odometry, pose_callback)
 
     # publishers
     publisher_image_threshold_orange = rospy.Publisher("/auto/gate_detection_threshold_orange", Image, queue_size=1)
