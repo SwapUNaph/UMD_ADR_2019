@@ -4,21 +4,20 @@ clc
 
 load('Busses.mat');
 gate_size = 1.4;
-two_std_dev_init = [0.7,0.7,0.4,deg2rad(60)];
-two_std_dev_thres = 0.15;
+two_std_dev_init = [0.8,0.8,1.2,deg2rad(45)];
+two_std_dev_thres = 0.2;
 
 resolution = [1280 720];
 VFOV = 1.05/1.2;
 HFOV = VFOV*resolution(1)/resolution(2);
 
-height = 1.1;
+height = 1.0;
 takeoff = [0, 0, height, deg2rad(0)];
-path_to_track = [2,0,0,deg2rad(-20)]; % start to first gate
-flightplan = [-4,1.5,0,deg2rad(-90); % end to first gate
-                0,-5,0,deg2rad(-90); % first gate to 2nd gate
-             3.5,-2,0,deg2rad(0);
-             2,-3,0,deg2rad(-90);
-             0,-4,0,deg2rad(-90)];
+path_to_track = [3.0,0,0,deg2rad(0)]; % start to first gate
+flightplan = [0,-5,0,deg2rad(0); % end to first gate
+                4,0,0,deg2rad(0); % first gate to 2nd gate
+             1.5,3.2,0,deg2rad(90);
+             -6,1.5,0,deg2rad(180)];
              
 
          
@@ -48,7 +47,7 @@ spline_init = [P0;P1;P2;P3];
 %% drone
 g = 9.81;
 
-max_vel = 0.8;
+max_vel = 1.0;
 max_theta_X = 8*pi/180; % radians
 max_theta_Y = 8*pi/180; % radians
 max_v_Z = 1*max_vel; % m/s

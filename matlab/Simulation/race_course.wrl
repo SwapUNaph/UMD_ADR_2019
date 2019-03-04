@@ -69,98 +69,20 @@ DEF Gates_on Switch {
         rotation 0 0 1 4.71239
         children USE gate
       }
-      DEF current_gate_red Transform {
-        translation 3 0 -5
-        scale 0.15 0.15 0.15
-        children DEF gate_0001 Group {
+      DEF G5 Transform {
+        translation 0 -3 2
+        rotation 0 0 1 4.71239
+        children DEF gate_0004 Group {
           children [
-            DEF b1_0001 Transform {
+            DEF b1_0004 Transform {
               translation 0.7 0 0
               rotation 1 0 0 1.5708
-              children DEF bar_0001 Shape {
-                appearance DEF red_col_App_0001 Appearance {
+              children DEF bar_0004 Shape {
+                appearance DEF red_col_App_0004 Appearance {
                   material Material {
-                    specularColor 1 0 0
+                    specularColor 0.8 0.5 0.04
                     shininess 1
-                    diffuseColor 1 0 0
-                  }
-                }
-                geometry Cylinder {
-                  radius 0.1
-                  height 1.4
-                }
-              }
-            }
-            DEF b2_0001 Transform {
-              translation -0.7 0 0
-              rotation 1 0 0 1.5708
-              children USE bar_0001
-            }
-            DEF b3_0001 Transform {
-              translation 0 0 -0.7
-              rotation 0 0 1 1.5708
-              children USE bar_0001
-            }
-            DEF b4_0001 Transform {
-              translation 0 0 0.7
-              rotation 0 0 1 1.5708
-              children USE bar_0001
-            }
-          ]
-        }
-      }
-      DEF current_gate_yellow Transform {
-        translation 3 0 -5
-        scale 0.3 0.3 0.3
-        children DEF gate_0002 Group {
-          children [
-            DEF b1_0002 Transform {
-              translation 0.7 0 0
-              rotation 1 0 0 1.5708
-              children DEF bar_0002 Shape {
-                appearance DEF red_col_App_0002 Appearance {
-                  material Material {
-                    shininess 1
-                    diffuseColor 1 1 0
-                  }
-                }
-                geometry Cylinder {
-                  radius 0.05
-                  height 1.4
-                }
-              }
-            }
-            DEF b2_0002 Transform {
-              translation -0.7 0 0
-              rotation 1 0 0 1.5708
-              children USE bar_0002
-            }
-            DEF b3_0002 Transform {
-              translation 0 0 -0.7
-              rotation 0 0 1 1.5708
-              children USE bar_0002
-            }
-            DEF b4_0002 Transform {
-              translation 0 0 0.7
-              rotation 0 0 1 1.5708
-              children USE bar_0002
-            }
-          ]
-        }
-      }
-      DEF current_gate_green Transform {
-        translation 3 0 -5
-        scale 0.5 0.5 0.5
-        children DEF gate_0003 Group {
-          children [
-            DEF b1_0003 Transform {
-              translation 0.7 0 0
-              rotation 1 0 0 1.5708
-              children DEF bar_0003 Shape {
-                appearance DEF red_col_App_0003 Appearance {
-                  material Material {
-                    shininess 1
-                    diffuseColor 0 1 0
+                    diffuseColor 0.8 0.51108 0.042442
                   }
                 }
                 geometry Cylinder {
@@ -169,20 +91,142 @@ DEF Gates_on Switch {
                 }
               }
             }
-            DEF b2_0003 Transform {
+            DEF b2_0004 Transform {
               translation -0.7 0 0
               rotation 1 0 0 1.5708
-              children USE bar_0003
+              children USE bar
             }
-            DEF b3_0003 Transform {
+            DEF b3_0004 Transform {
               translation 0 0 -0.7
               rotation 0 0 1 1.5708
-              children USE bar_0003
+              children USE bar
             }
-            DEF b4_0003 Transform {
+            DEF b4_0004 Transform {
               translation 0 0 0.7
               rotation 0 0 1 1.5708
-              children USE bar_0003
+              children USE bar
+            }
+            DEF stand_0001 Transform {
+              translation 0 0 -1.4
+              scale 0 0 0
+              rotation 1 0 0 1.5708
+              children USE bar
+            }
+          ]
+        }
+      }
+      DEF G6 Transform {
+        translation 0 -3 2
+        rotation 0 0 1 4.71239
+        children DEF gate_0001 Group {
+          children [
+            DEF b1_0001 Transform {
+              translation 0.7 0 0
+              rotation 1 0 0 1.5708
+              children DEF bar_0001 Shape {
+                appearance DEF red_col_App_0001 Appearance {
+                  material Material {
+                    specularColor 0.8 0.5 0.04
+                    shininess 1
+                    diffuseColor 0.8 0.51108 0.042442
+                  }
+                }
+                geometry Cylinder {
+                  radius 0.025
+                  height 1.4
+                }
+              }
+            }
+            DEF b2_0001 Transform {
+              translation -0.7 0 0
+              rotation 1 0 0 1.5708
+              children DEF bar_0002 Shape {
+                appearance DEF red_col_App_0002 Appearance {
+                  material Material {
+                    specularColor 0.8 0.5 0.04
+                    shininess 1
+                    diffuseColor 0.8 0.51108 0.042442
+                  }
+                }
+                geometry Cylinder {
+                  radius 0.025
+                  height 1.4
+                }
+              }
+            }
+            DEF b3_0001 Transform {
+              translation 0 0 -0.7
+              rotation 0 0 1 1.5708
+              children USE bar
+            }
+            DEF b4_0001 Transform {
+              translation 0 0 0.7
+              rotation 0 0 1 1.5708
+              children USE bar
+            }
+            DEF stand_0002 Transform {
+              translation 0 0 -1.4
+              scale 0 0 0
+              rotation 1 0 0 1.5708
+              children USE bar
+            }
+          ]
+        }
+      }
+      DEF G7 Transform {
+        translation 0 -3 2
+        rotation 0 0 1 4.71239
+        children DEF gate_0002 Group {
+          children [
+            DEF b1_0002 Transform {
+              translation 0.7 0 0
+              rotation 1 0 0 1.5708
+              children DEF bar_0003 Shape {
+                appearance DEF red_col_App_0003 Appearance {
+                  material Material {
+                    specularColor 0.8 0.5 0.04
+                    shininess 1
+                    diffuseColor 0.8 0.51108 0.042442
+                  }
+                }
+                geometry Cylinder {
+                  radius 0.025
+                  height 1.4
+                }
+              }
+            }
+            DEF b2_0002 Transform {
+              translation -0.7 0 0
+              rotation 1 0 0 1.5708
+              children DEF bar_0005 Shape {
+                appearance DEF red_col_App_0005 Appearance {
+                  material Material {
+                    specularColor 0.8 0.5 0.04
+                    shininess 1
+                    diffuseColor 0.8 0.51108 0.042442
+                  }
+                }
+                geometry Cylinder {
+                  radius 0.025
+                  height 1.4
+                }
+              }
+            }
+            DEF b3_0002 Transform {
+              translation 0 0 -0.7
+              rotation 0 0 1 1.5708
+              children USE bar
+            }
+            DEF b4_0002 Transform {
+              translation 0 0 0.7
+              rotation 0 0 1 1.5708
+              children USE bar
+            }
+            DEF stand_0003 Transform {
+              translation 0 0 -1.4
+              scale 0 0 0
+              rotation 1 0 0 1.5708
+              children USE bar
             }
           ]
         }
@@ -203,17 +247,17 @@ DEF walls Group {
           }
         }
         geometry Box {
-          size 15 15 0.1
+          size 30 30 0.1
         }
       }
     }
     DEF wall1 Transform {
-      translation 7.5 0 2
+      translation 15 0 2
       rotation 0 1 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 30 4
             rotation 1.5708
           }
           texture ImageTexture {
@@ -221,34 +265,34 @@ DEF walls Group {
           }
         }
         geometry Box {
-          size 4 15 0.1
+          size 4 30 0.1
         }
       }
     }
     DEF wall2 Transform {
-      translation 0 7.5 2
+      translation 0 15 2
       rotation 1 0 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 30 4
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Brick_Stone.png" 
           }
         }
         geometry Box {
-          size 15 4 0.1
+          size 30 4 0.1
         }
       }
     }
     DEF wall3 Transform {
-      translation -7.5 0 2
+      translation -15 0 2
       rotation 0 1 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 30 4
             rotation 1.5708
           }
           texture ImageTexture {
@@ -256,24 +300,24 @@ DEF walls Group {
           }
         }
         geometry Box {
-          size 4 15 0.1
+          size 4 30 0.1
         }
       }
     }
     DEF wall4 Transform {
-      translation 0 -7.5 2
+      translation 0 -15 2
       rotation 1 0 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 30 4
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Brick_Large.jpg" 
           }
         }
         geometry Box {
-          size 15 4 0.1
+          size 30 4 0.1
         }
       }
     }
@@ -282,14 +326,14 @@ DEF walls Group {
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 15
+            scale 30 30
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Metal_Corrugated.png" 
           }
         }
         geometry Box {
-          size 15 15 0.1
+          size 30 30 0.1
         }
       }
     }

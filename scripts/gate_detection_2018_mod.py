@@ -114,10 +114,11 @@ def stereo_callback(data):
     if debug_on:
         this_pose = Pose()
     else:
-        if latest_pose is None:
+        if latest_zed_pose is None or latest_bebop_pose is None:
             print("No position")
             return
-        this_pose = latest_pose
+        this_pose = latest_zed_pose
+        this_pose.position.z = latest_bebop_pose.position.z
 
     # convert image msg to matrix
     rgb = bridge.imgmsg_to_cv2(data, desired_encoding=data.encoding)
@@ -694,10 +695,16 @@ def stereo_callback(data):
     # time.sleep(3)
 
 
-def pose_callback(data):
+def zed_pose_callback(data):
     # update odometry
-    global latest_pose
-    latest_pose = data.pose.pose
+    global latest_zed_pose
+    latest_zed_pose = data.pose.pose
+
+
+def bebop_pose_callback(data):
+    # update odometry
+    global latest_bebop_pose
+    latest_bebop_pose = data.pose.pose
 
 
 def camera_info_update(data):
@@ -714,7 +721,8 @@ if __name__ == '__main__':
 
     # variables
     camera_matrix = None  # np.array([[669.86121, 0.0, 629.62378], [0.0, 669.86121, 384.62851], [0.0, 0.0, 1.0]])
-    latest_pose = None                          # latest odometry
+    latest_zed_pose = None  # latest odometry
+    latest_bebop_pose = None  # latest odometry
     gate_size = 1.4                             # initial gate size
     output_scale = 0.1                          # factor to scale all images with before broadcasting to save bandwidth
     orange_low = np.array([80, 150, 90])       # some original orange values
@@ -726,7 +734,8 @@ if __name__ == '__main__':
     # subscribers
     rospy.Subscriber("/zed/left/camera_info", CameraInfo, camera_info_update)
     rospy.Subscriber("/zed/left/image_rect_color", Image, stereo_callback)
-    rospy.Subscriber("/zed/odom", Odometry, pose_callback)
+    rospy.Subscriber("/zed/odom", Odometry, zed_pose_callback)
+    rospy.Subscriber("/bebop/odom", Odometry, bebop_pose_callback)
 
     # publishers
     publisher_image_threshold_orange = rospy.Publisher("/auto/gate_detection_threshold_orange", Image, queue_size=1)

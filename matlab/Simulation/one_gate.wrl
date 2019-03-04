@@ -61,24 +61,24 @@ DEF walls Group {
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 15
+            scale 25 25
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Woodfloor_Brown.png" 
           }
         }
         geometry Box {
-          size 15 15 0.1
+          size 25 25 0.1
         }
       }
     }
     DEF wall1 Transform {
-      translation 7.5 0 2
+      translation 12.5 0 2
       rotation 0 1 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 25 4
             rotation 1.5708
           }
           texture ImageTexture {
@@ -86,34 +86,34 @@ DEF walls Group {
           }
         }
         geometry Box {
-          size 4 15 0.1
+          size 4 25 0.1
         }
       }
     }
     DEF wall2 Transform {
-      translation 0 7.5 2
+      translation 0 12.5 2
       rotation 1 0 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 25 4
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Brick_Stone.png" 
           }
         }
         geometry Box {
-          size 15 4 0.1
+          size 25 4 0.1
         }
       }
     }
     DEF wall3 Transform {
-      translation -7.5 0 2
+      translation -12.5 0 2
       rotation 0 1 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 25 4
             rotation 1.5708
           }
           texture ImageTexture {
@@ -121,24 +121,24 @@ DEF walls Group {
           }
         }
         geometry Box {
-          size 4 15 0.1
+          size 4 25 0.1
         }
       }
     }
     DEF wall4 Transform {
-      translation 0 -7.5 2
+      translation 0 -12.5 2
       rotation 1 0 0 1.5708
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 4
+            scale 25 4
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Brick_Large.jpg" 
           }
         }
         geometry Box {
-          size 15 4 0.1
+          size 25 4 0.1
         }
       }
     }
@@ -147,14 +147,14 @@ DEF walls Group {
       children Shape {
         appearance Appearance {
           textureTransform TextureTransform {
-            scale 15 15
+            scale 25 25
           }
           texture ImageTexture {
             url "*sl3dlib/objects/Textures/General/Metal_Corrugated.png" 
           }
         }
         geometry Box {
-          size 15 15 0.1
+          size 25 25 0.1
         }
       }
     }

@@ -1,0 +1,74 @@
+clc
+close all
+clear
+
+gate_width = 0.7;
+gate_r = 0.025;
+drone_r = 0.2;
+
+filename = 'Sim1.mat';
+SimxD=zeros(10,3,3,3,3);
+load(filename);
+
+SimResult = zeros(size(SimData,1),10);
+
+for sim = 1:size(SimData,1)
+    if isequal(SimData{sim,1},[])
+        SimResult(sim,7) = 1;
+    else
+
+    % SimData(i,1) = num2cell(output.sim_idx.Time,1);
+    % SimData(i,2) = num2cell(output.sim_idx.Data,1);
+    % SimData(i,3) = num2cell(output.sim_state_pos.Time,1);
+    % SimData(i,4) = num2cell(output.sim_state_pos.Data,[1,2]);
+    % SimData(i,5) = num2cell(output.sim_gates.Data(:,:,1),[1,2]);
+    sim_idx_Time = SimData{sim,1};
+    sim_idx_Data = SimData{sim,2};
+    sim_state_pos_Time = SimData{sim,3};
+    sim_state_pos_Data = SimData{sim,4};
+    sim_gates = SimData{sim,5};
+
+    %% check collision
+    % for every line segment check distance to all circles
+    drone_pos_xy = sim_state_pos_Data(:,1:2);
+    gates = sim_gates(:,:,1);
+    drone_pos_xy_p = drone_pos_xy .* ones(1,1,size(gates,1));
+    gates_pos_xy = gates(:,1:2);
+    gates_pos_xy = gates_pos_xy .* ones(1,1,size(drone_pos_xy,1));
+    gates_pos_xy = permute(gates_pos_xy,[3,2,1]);
+
+    dist_g = gates_pos_xy-drone_pos_xy_p;
+    dist_g = squeeze(vecnorm(dist_g,2,2));
+
+    [~, closest_gate] = min(dist_g,[],2);
+    gates_lr = cat(3, gates(:,1:2) + gate_width*[sin(gates(:,4)), -cos(gates(:,4))], ...
+                      gates(:,1:2) - gate_width*[sin(gates(:,4)), -cos(gates(:,4))]);
+
+    closest_gate_lr = gates_lr(closest_gate,:,:);
+    % closest_gate_lr = closest_gate_lr(2:end,:,:);
+
+    % line_segments = [drone_pos_xy(1:end-1,:), drone_pos_xy(2:end,:)];
+
+    drone_pos_xy_p = drone_pos_xy .* ones(1,1,2);
+    dist_lr = min(vecnorm(drone_pos_xy_p - closest_gate_lr,2,2),[],3);
+    min_dist = min(dist_lr);
+    SimResult(sim,1) = min_dist;
+    SimResult(sim,2) = min_dist > gate_r+drone_r;
+
+    %% check gate completion and time
+    SimResult(sim,3) = max(sim_idx_Data);
+    SimResult(sim,4) = (max(sim_idx_Data)==7 && sim_idx_Data(end) == 0);
+    SimResult(sim,5) = sim_idx_Time(end);
+    SimResult(sim,6) = 1;
+    end
+end
+
+save(filename,'SimData','SimResult')
+
+% 1: min dist
+% 2: min dist ok?
+% 3: maximum gate
+% 4: reached end?
+% 5: maximum time
+% 6: simulated yes
+% 7: not simulated
